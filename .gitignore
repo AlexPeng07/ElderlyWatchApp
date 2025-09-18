@@ -1,0 +1,15 @@
+# Android Studio / Gradle generated files
+.gradle/
+.idea/
+**/build/
+*.iml
+local.properties
+
+# Local packages and release outputs
+**/release/
+*.apk
+*.aab
+
+# OS files
+.DS_Store
+Thumbs.db
