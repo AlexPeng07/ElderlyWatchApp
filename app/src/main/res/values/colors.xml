@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="navy_900">#102A43</color>
+    <color name="navy_800">#173F5F</color>
+    <color name="teal_600">#087F78</color>
+    <color name="teal_700">#066B66</color>
+    <color name="teal_100">#DDF3EF</color>
+    <color name="coral_600">#D94F52</color>
+    <color name="coral_700">#BE3E43</color>
+    <color name="coral_100">#FCE9E9</color>
+    <color name="amber_600">#C87924</color>
+    <color name="amber_100">#FFF0D9</color>
+    <color name="blue_100">#E5F0FA</color>
+    <color name="canvas">#F3F7FA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="text_primary">#17324D</color>
+    <color name="text_secondary">#617487</color>
+    <color name="line">#DCE6ED</color>
+    <color name="muted_surface">#EAF0F4</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white">#FFFFFF</color>
+</resources>
