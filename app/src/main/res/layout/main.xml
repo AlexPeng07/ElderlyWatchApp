@@ -1,83 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical" android:background="#F0F4F8">
-    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="vertical">
-        <ScrollView android:id="@+id/scroll_dashboard" android:layout_width="match_parent" android:layout_height="match_parent" android:padding="16dp" android:scrollbars="none">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:background="@color/canvas"
+    android:orientation="vertical" tools:context=".MainActivity">
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+        <ScrollView android:id="@+id/scroll_dashboard" android:layout_width="match_parent" android:layout_height="match_parent"
+            android:clipToPadding="false" android:fillViewport="true" android:scrollbars="none">
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
-                <Button android:layout_width="match_parent" android:layout_height="60dp" android:layout_marginBottom="16dp"
-                    android:backgroundTint="#2196F3" android:onClick="onMapButtonClicked" android:text="老人物联网手环守护网站"
-                    android:textColor="#FFFFFF" android:textSize="18sp" android:textStyle="bold" />
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:baselineAligned="false" android:orientation="horizontal">
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="16dp" android:background="#FFFFFF" android:elevation="4dp" android:gravity="center" android:orientation="vertical" android:padding="16dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="实时心率" android:textColor="#888888" android:textSize="20sp" android:textStyle="bold" />
-                        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="bottom" android:orientation="horizontal">
-                            <TextView android:id="@+id/textViewHeartrate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#E53935" android:textSize="50sp" android:textStyle="bold" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="8dp" android:text=" bmp" android:textColor="#888888" android:textSize="16sp" />
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@drawable/bg_header"
+                    android:orientation="vertical" android:paddingStart="22dp" android:paddingTop="24dp" android:paddingEnd="22dp" android:paddingBottom="28dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.08" android:text="银龄智守" android:textColor="@color/white" android:textSize="28sp" android:textStyle="bold" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                        android:text="独居老人健康与安全守护" android:textColor="@color/white_80" android:textSize="15sp" />
+                    <Button style="@style/ActionButton" android:layout_marginTop="20dp" android:background="@drawable/button_outline"
+                        android:onClick="onMapButtonClicked" android:text="进入家属守护中心" android:textColor="@color/white" />
+                </LinearLayout>
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"
+                    android:paddingStart="18dp" android:paddingTop="20dp" android:paddingEnd="18dp" android:paddingBottom="22dp">
+
+                    <TextView android:id="@+id/diedao" android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:background="@drawable/bg_status_disconnected" android:fontFamily="sans-serif-medium" android:gravity="center_vertical"
+                        android:minHeight="62dp" android:paddingStart="18dp" android:paddingTop="12dp" android:paddingEnd="18dp" android:paddingBottom="12dp"
+                        android:text="手环未连接" android:textColor="@color/text_secondary" android:textSize="18sp" android:textStyle="bold" />
+
+                    <TextView style="@style/Text.SectionTitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp" android:text="实时健康数据" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:layout_marginBottom="14dp"
+                        android:text="数据由已连接手环同步" android:textColor="@color/text_secondary" android:textSize="14sp" />
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:baselineAligned="false" android:orientation="horizontal">
+                        <LinearLayout style="@style/MetricCard" android:layout_marginEnd="7dp" android:background="@drawable/bg_metric_heart">
+                            <TextView style="@style/Text.Label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="实时心率" />
+                            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:gravity="bottom" android:orientation="horizontal">
+                                <TextView android:id="@+id/textViewHeartrate" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-condensed" android:includeFontPadding="false" android:text="0"
+                                    android:textColor="@color/coral_700" android:textSize="48sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:layout_marginBottom="5dp"
+                                    android:text="BPM" android:textColor="@color/coral_700" android:textSize="13sp" android:textStyle="bold" />
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout style="@style/MetricCard" android:layout_marginStart="7dp" android:background="@drawable/bg_metric_temp">
+                            <TextView style="@style/Text.Label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="体表温度" />
+                            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:gravity="bottom" android:orientation="horizontal">
+                                <TextView android:id="@+id/textViewTemperature" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif-condensed" android:includeFontPadding="false" android:text="0"
+                                    android:textColor="@color/amber_600" android:textSize="48sp" android:textStyle="bold" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="3dp" android:layout_marginBottom="5dp"
+                                    android:text="°C" android:textColor="@color/amber_600" android:textSize="14sp" android:textStyle="bold" />
+                            </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginStart="8dp"
-                        android:layout_marginBottom="16dp" android:background="#FFFFFF" android:elevation="4dp" android:gravity="center" android:orientation="vertical" android:padding="16dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="体表温度" android:textColor="#888888" android:textSize="20sp" android:textStyle="bold" />
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="112dp" android:layout_marginTop="14dp"
+                        android:background="@drawable/bg_metric_steps" android:gravity="center_vertical" android:orientation="horizontal"
+                        android:paddingStart="20dp" android:paddingEnd="20dp">
+                        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+                            <TextView style="@style/Text.Label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="今日活动" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4dp"
+                                android:text="每一步，都算数" android:textColor="@color/text_secondary" android:textSize="14sp" />
+                        </LinearLayout>
                         <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="bottom" android:orientation="horizontal">
-                            <TextView android:id="@+id/textViewTemperature" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#FB8C00" android:textSize="50sp" android:textStyle="bold" />
-                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="8dp" android:text=" ℃" android:textColor="#888888" android:textSize="16sp" />
+                            <TextView android:id="@+id/textViewSteps" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-condensed" android:includeFontPadding="false" android:text="0"
+                                android:textColor="@color/navy_800" android:textSize="48sp" android:textStyle="bold" />
+                            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="4dp" android:layout_marginBottom="5dp"
+                                android:text="步" android:textColor="@color/navy_800" android:textSize="14sp" android:textStyle="bold" />
                         </LinearLayout>
                     </LinearLayout>
+
+                    <Button android:id="@+id/btn_emergency" android:layout_width="match_parent" android:layout_height="84dp" android:layout_marginTop="18dp"
+                        android:background="@drawable/button_emergency" android:elevation="4dp" android:fontFamily="sans-serif-medium"
+                        android:onClick="onEmergencyButtonClicked" android:stateListAnimator="@null" android:text="紧急求助" android:textAllCaps="false"
+                        android:textColor="@color/white" android:textSize="25sp" android:textStyle="bold" />
+                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:gravity="center"
+                        android:text="急病或跌倒时点击，将向家属发送短信" android:textColor="@color/text_secondary" android:textSize="13sp" />
+
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp"
+                        android:background="@drawable/bg_card" android:elevation="2dp" android:orientation="vertical" android:padding="18dp">
+                        <TextView style="@style/Text.SectionTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="守护参数" />
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="4dp" android:layout_marginBottom="18dp"
+                            android:text="家属可根据日常状况微调报警范围" android:textColor="@color/text_secondary" android:textSize="14sp" />
+
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                            <TextView android:layout_width="76dp" android:layout_height="wrap_content" android:text="心率下限" android:textColor="@color/text_primary" android:textSize="15sp" />
+                            <Button style="@style/StepButton" android:onClick="onDecHeartrateMinClicked" android:text="−" />
+                            <TextView android:id="@+id/textViewSetHeartrateMin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                                android:gravity="center" android:text="60" android:textColor="@color/text_primary" android:textSize="21sp" android:textStyle="bold" />
+                            <Button style="@style/StepButton" android:onClick="onAddHeartrateMinClicked" android:text="+" />
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginTop="10dp" android:layout_marginBottom="10dp" android:background="@color/line" />
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                            <TextView android:layout_width="76dp" android:layout_height="wrap_content" android:text="心率上限" android:textColor="@color/text_primary" android:textSize="15sp" />
+                            <Button style="@style/StepButton" android:onClick="onDecHeartrateMaxClicked" android:text="−" />
+                            <TextView android:id="@+id/textViewSetHeartrateMax" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center"
+                                android:text="120" android:textColor="@color/text_primary" android:textSize="21sp" android:textStyle="bold" />
+                            <Button style="@style/StepButton" android:onClick="onAddHeartrateMaxClicked" android:text="+" />
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginTop="10dp" android:layout_marginBottom="10dp" android:background="@color/line" />
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                            <TextView android:layout_width="76dp" android:layout_height="wrap_content" android:text="温度下限" android:textColor="@color/text_primary" android:textSize="15sp" />
+                            <Button style="@style/StepButton" android:onClick="onDecTempMinClicked" android:text="−" />
+                            <TextView android:id="@+id/textViewTempMin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center"
+                                android:text="15.0" android:textColor="@color/text_primary" android:textSize="21sp" android:textStyle="bold" />
+                            <Button style="@style/StepButton" android:onClick="onAddTempMinClicked" android:text="+" />
+                        </LinearLayout>
+                        <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginTop="10dp" android:layout_marginBottom="10dp" android:background="@color/line" />
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
+                            <TextView android:layout_width="76dp" android:layout_height="wrap_content" android:text="温度上限" android:textColor="@color/text_primary" android:textSize="15sp" />
+                            <Button style="@style/StepButton" android:onClick="onDecTempMaxClicked" android:text="−" />
+                            <TextView android:id="@+id/textViewTempMax" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center"
+                                android:text="37.3" android:textColor="@color/text_primary" android:textSize="21sp" android:textStyle="bold" />
+                            <Button style="@style/StepButton" android:onClick="onAddTempMaxClicked" android:text="+" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView style="@style/Text.SectionTitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:layout_marginTop="26dp" android:layout_marginBottom="12dp" android:text="家属服务" />
+                    <Button style="@style/ActionButton" android:background="@drawable/button_dark" android:onClick="onAdminButtonClicked"
+                        android:text="打开守护管理端" android:textColor="@color/white" />
+                    <Button style="@style/ActionButton" android:layout_marginTop="10dp" android:background="@drawable/button_soft"
+                        android:onClick="onSmsNumberButtonClicked" android:text="设置短信通知号码" android:textColor="@color/navy_800" />
                 </LinearLayout>
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp"
-                    android:background="#FFFFFF" android:elevation="4dp" android:gravity="center" android:orientation="vertical" android:padding="16dp">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="今日运动步数" android:textColor="#888888" android:textSize="20sp" android:textStyle="bold" />
-                    <TextView android:id="@+id/textViewSteps" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:textColor="#1E88E5" android:textSize="50sp" android:textStyle="bold" />
-                </LinearLayout>
-                <TextView android:id="@+id/diedao" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp"
-                    android:background="#EEEEEE" android:elevation="2dp" android:gravity="center" android:padding="16dp" android:text="手环未连接"
-                    android:textColor="#757575" android:textSize="24sp" android:textStyle="bold" />
-                <Button android:id="@+id/btn_emergency" android:layout_width="match_parent" android:layout_height="90dp" android:layout_marginBottom="24dp"
-                    android:backgroundTint="#D32F2F" android:onClick="onEmergencyButtonClicked" android:text="急病 / 跌倒一键求助"
-                    android:textColor="#FFFFFF" android:textSize="30sp" android:textStyle="bold" />
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:background="#FFFFFF" android:elevation="2dp" android:orientation="vertical" android:padding="16dp">
-                    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp" android:text="报警参数微调 (家属专用)" android:textColor="#999999" android:textSize="16sp" />
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp" android:gravity="center_vertical" android:orientation="horizontal">
-                        <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="心率下限:" android:textSize="16sp" />
-                        <Button android:layout_width="50dp" android:layout_height="50dp" android:onClick="onDecHeartrateMinClicked" android:text="-" />
-                        <TextView android:id="@+id/textViewSetHeartrateMin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="60" android:textSize="22sp" android:textStyle="bold" />
-                        <Button android:layout_width="50dp" android:layout_height="50dp" android:onClick="onAddHeartrateMinClicked" android:text="+" />
-                    </LinearLayout>
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp" android:gravity="center_vertical" android:orientation="horizontal">
-                        <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="心率上限:" android:textSize="16sp" />
-                        <Button android:layout_width="50dp" android:layout_height="50dp" android:onClick="onDecHeartrateMaxClicked" android:text="-" />
-                        <TextView android:id="@+id/textViewSetHeartrateMax" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="120" android:textSize="22sp" android:textStyle="bold" />
-                        <Button android:layout_width="50dp" android:layout_height="50dp" android:onClick="onAddHeartrateMaxClicked" android:text="+" />
-                    </LinearLayout>
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="8dp" android:gravity="center_vertical" android:orientation="horizontal">
-                        <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="温度下限:" android:textSize="16sp" />
-                        <Button android:layout_width="50dp" android:layout_height="50dp" android:onClick="onDecTempMinClicked" android:text="-" />
-                        <TextView android:id="@+id/textViewTempMin" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="15.0" android:textSize="22sp" android:textStyle="bold" />
-                        <Button android:layout_width="50dp" android:layout_height="50dp" android:onClick="onAddTempMinClicked" android:text="+" />
-                    </LinearLayout>
-                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal">
-                        <TextView android:layout_width="80dp" android:layout_height="wrap_content" android:text="温度上限:" android:textSize="16sp" />
-                        <Button android:layout_width="50dp" android:layout_height="50dp" android:onClick="onDecTempMaxClicked" android:text="-" />
-                        <TextView android:id="@+id/textViewTempMax" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:text="37.3" android:textSize="22sp" android:textStyle="bold" />
-                        <Button android:layout_width="50dp" android:layout_height="50dp" android:onClick="onAddTempMaxClicked" android:text="+" />
-                    </LinearLayout>
-                </LinearLayout>
-                <Button android:layout_width="match_parent" android:layout_height="60dp" android:layout_marginTop="16dp" android:backgroundTint="#673AB7"
-                    android:onClick="onAdminButtonClicked" android:text="老人物联网手环守护网站管理员端" android:textColor="#FFFFFF" android:textSize="18sp" android:textStyle="bold" />
-                <Button android:layout_width="match_parent" android:layout_height="60dp" android:layout_marginTop="16dp" android:backgroundTint="#00897B"
-                    android:onClick="onSmsNumberButtonClicked" android:text="更改短信通知号码" android:textColor="#FFFFFF" android:textSize="18sp" android:textStyle="bold" />
             </LinearLayout>
         </ScrollView>
         <WebView android:id="@+id/webView_map" android:layout_width="match_parent" android:layout_height="match_parent" android:visibility="gone" />
-    </LinearLayout>
-    <LinearLayout android:id="@+id/ll_bottom_buttons" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="#FFFFFF" android:elevation="16dp" android:orientation="horizontal" android:padding="8dp">
-        <Button android:id="@+id/butConnect" android:layout_width="0dp" android:layout_height="70dp" android:layout_weight="1.2" android:layout_marginEnd="6dp"
-            android:backgroundTint="#4CAF50" android:onClick="onConnectButtonClicked" android:text="连接手环" android:textColor="#FFFFFF" android:textSize="22sp" android:textStyle="bold" />
-        <Button android:id="@+id/butDisconnect" android:layout_width="0dp" android:layout_height="70dp" android:layout_weight="1" android:layout_marginEnd="6dp"
-            android:backgroundTint="#FF9800" android:onClick="onDisconnectionClicked" android:text="断开" android:textColor="#FFFFFF" android:textSize="20sp" android:textStyle="bold" />
-        <Button android:id="@+id/butExit" android:layout_width="0dp" android:layout_height="70dp" android:layout_weight="0.8"
-            android:backgroundTint="#9E9E9E" android:onClick="onExitButtonClicked" android:text="退出" android:textColor="#FFFFFF" android:textSize="20sp" android:textStyle="bold" />
+    </FrameLayout>
+
+    <LinearLayout android:id="@+id/ll_bottom_buttons" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:background="@drawable/bg_bottom_bar" android:elevation="12dp" android:gravity="center_vertical" android:orientation="horizontal"
+        android:paddingStart="12dp" android:paddingTop="11dp" android:paddingEnd="12dp" android:paddingBottom="11dp">
+        <Button android:id="@+id/butConnect" style="@style/ActionButton" android:layout_width="0dp" android:layout_weight="1.25"
+            android:background="@drawable/button_primary" android:onClick="onConnectButtonClicked" android:text="连接手环" android:textColor="@color/white" />
+        <Button android:id="@+id/butDisconnect" style="@style/ActionButton" android:layout_width="0dp" android:layout_weight="0.9" android:layout_marginStart="8dp"
+            android:background="@drawable/button_soft" android:onClick="onDisconnectionClicked" android:text="断开" android:textColor="@color/navy_800" />
+        <Button android:id="@+id/butExit" style="@style/ActionButton" android:layout_width="0dp" android:layout_weight="0.72" android:layout_marginStart="8dp"
+            android:background="@drawable/button_soft" android:onClick="onExitButtonClicked" android:text="退出" android:textColor="@color/text_secondary" />
     </LinearLayout>
 </LinearLayout>
