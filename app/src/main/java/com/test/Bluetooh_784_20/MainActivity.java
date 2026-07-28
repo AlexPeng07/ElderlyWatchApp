@@ -138,8 +138,8 @@ public class MainActivity extends Activity {
 				if (!textViewStatus.getText().toString().contains("已自动发送短信")) {
 					// 1. 改变 UI 文字和颜色
 					textViewStatus.setText("检测到跌倒！已自动发送短信！");
-					textViewStatus.setTextColor(0xFFD32F2F); // 深红色
-					textViewStatus.setBackgroundColor(0xFFFFEBEE); // 浅红色背景提醒
+					textViewStatus.setTextColor(0xFFBE3E43); // 深红色
+					textViewStatus.setBackgroundResource(R.drawable.bg_status_alert);
 
 					// 2. 自动调用发短信方法 (使用 MainActivity.this 解决作用域报错)
 					MainActivity.this.onEmergencyButtonClicked(null);
@@ -194,16 +194,16 @@ public class MainActivity extends Activity {
 		TextView tv = findViewById(R.id.diedao);
 		if (tv == null) return; // 防御：Activity 销毁后的极端时序
 		tv.setText(text);
-		tv.setTextColor(0xFF757575);      // 灰色文字
-		tv.setBackgroundColor(0xFFEEEEEE); // 浅灰背景
+		tv.setTextColor(0xFF617487);      // 灰蓝色文字
+		tv.setBackgroundResource(R.drawable.bg_status_disconnected);
 	}
 
 	private void setStatusMonitoring() {
 		TextView tv = findViewById(R.id.diedao);
 		if (tv == null) return;
 		tv.setText("状态正常，监控中...");
-		tv.setTextColor(0xFF2E7D32);      // 绿色文字
-		tv.setBackgroundColor(0xFFE8F5E9); // 浅绿背景
+		tv.setTextColor(0xFF066B66);      // 青绿色文字
+		tv.setBackgroundResource(R.drawable.bg_status_monitoring);
 	}
 
 	// 蓝牙连接回调
