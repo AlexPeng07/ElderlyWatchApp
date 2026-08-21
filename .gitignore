@@ -10,6 +10,15 @@ local.properties
 *.apk
 *.aab
 
+# Personal, deployment and signing configuration
+app/src/main/assets/private-config.properties
+**/private-config.properties
+*.keystore
+*.jks
+keystore.properties
+signing.properties
+google-services.json
+
 # OS files
 .DS_Store
 Thumbs.db

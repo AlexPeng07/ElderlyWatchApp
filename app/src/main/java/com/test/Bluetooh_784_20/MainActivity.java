@@ -3,6 +3,7 @@ package com.test.Bluetooh_784_20;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Properties;
 import java.util.UUID;
 
 import android.Manifest;
@@ -311,9 +312,18 @@ public class MainActivity extends Activity {
 	}
 
 	// ===== 短信接收号码：SharedPreferences 持久化，可在页面底部入口修改 =====
+	private String getPrivateConfigValue(String key) {
+		Properties properties = new Properties();
+		try (InputStream input = getAssets().open("private-config.properties")) {
+			return properties.getProperty(key, "").trim();
+		} catch (IOException e) {
+			return "";
+		}
+	}
+
 	private String getSmsTargetNumber() {
 		return getSharedPreferences("config", MODE_PRIVATE)
-				.getString("sms_number", ""); // 默认号码
+				.getString("sms_number", getPrivateConfigValue("sms.default_number"));
 	}
 
 	// 页面底部入口：弹窗更改接收短信的手机号码
@@ -380,12 +390,21 @@ public class MainActivity extends Activity {
 
 	// 守护网站：内嵌全屏浏览（登录状态通过 Cookie + localStorage 自动保存）
 	public void onMapButtonClicked(View view) {
-		openInWebView("""");
+		openConfiguredWebPage("guardian.portal.url", "家属守护中心地址未配置");
 	}
 
 	// 守护网站管理员端
 	public void onAdminButtonClicked(View view) {
-		openInWebView("""");
+		openConfiguredWebPage("guardian.admin.url", "守护管理端地址未配置");
+	}
+
+	private void openConfiguredWebPage(String key, String missingMessage) {
+		String url = getPrivateConfigValue(key);
+		if (url.isEmpty()) {
+			Toast.makeText(this, missingMessage, Toast.LENGTH_SHORT).show();
+			return;
+		}
+		openInWebView(url);
 	}
 
 	// 通用的 WebView 内嵌浏览方法
