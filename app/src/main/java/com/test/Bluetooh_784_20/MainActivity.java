@@ -3,7 +3,6 @@ package com.test.Bluetooh_784_20;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Properties;
 import java.util.UUID;
 
 import android.Manifest;
@@ -312,18 +311,9 @@ public class MainActivity extends Activity {
 	}
 
 	// ===== 短信接收号码：SharedPreferences 持久化，可在页面底部入口修改 =====
-	private String getPrivateConfigValue(String key) {
-		Properties properties = new Properties();
-		try (InputStream input = getAssets().open("private-config.properties")) {
-			return properties.getProperty(key, "").trim();
-		} catch (IOException e) {
-			return "";
-		}
-	}
-
 	private String getSmsTargetNumber() {
 		return getSharedPreferences("config", MODE_PRIVATE)
-				.getString("sms_number", getPrivateConfigValue("sms.default_number"));
+				.getString("sms_number", "");
 	}
 
 	// 页面底部入口：弹窗更改接收短信的手机号码
@@ -352,10 +342,48 @@ public class MainActivity extends Activity {
 			.show();
 	}
 
+	public void onPortalUrlButtonClicked(View view) {
+		showUrlInputDialog("设置家属守护中心地址", "guardian.portal.url");
+	}
+
+	public void onAdminUrlButtonClicked(View view) {
+		showUrlInputDialog("设置守护管理端地址", "guardian.admin.url");
+	}
+
+	private void showUrlInputDialog(String title, final String key) {
+		final EditText input = new EditText(this);
+		input.setText(getSharedPreferences("config", MODE_PRIVATE).getString(key, ""));
+		input.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_VARIATION_URI);
+		input.setHint("请输入网站地址");
+		input.setSelection(input.getText().length());
+
+		new android.app.AlertDialog.Builder(this)
+			.setTitle(title)
+			.setView(input)
+			.setPositiveButton("保存", new android.content.DialogInterface.OnClickListener(){
+				public void onClick(android.content.DialogInterface dialog, int which){
+					String url = input.getText().toString().trim();
+					if (url.matches("https?://.+")) {
+						getSharedPreferences("config", MODE_PRIVATE).edit()
+								.putString(key, url).apply();
+						Toast.makeText(MainActivity.this, "网站地址已更新", Toast.LENGTH_SHORT).show();
+					} else {
+						Toast.makeText(MainActivity.this, "请输入有效的网站地址", Toast.LENGTH_SHORT).show();
+					}
+				}
+			})
+			.setNegativeButton("取消", null)
+			.show();
+	}
+
 	// 跌倒/紧急求助发短信 (手动触发与自动触发复用此逻辑)
 	public void onEmergencyButtonClicked(View view) {
 		String targetNumber = getSmsTargetNumber(); // 接收号码可在页面底部入口更改
 		String smsContent = "【银龄智守】警告：监测到老人发生意外跌倒或发起求助，请立即确认安全！";
+		if (targetNumber.isEmpty()) {
+			Toast.makeText(this, "请先在页面下方设置短信通知号码", Toast.LENGTH_SHORT).show();
+			return;
+		}
 
 		if (checkSelfPermission(Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
 			requestPermissions(new String[]{Manifest.permission.SEND_SMS}, 101);
@@ -399,7 +427,8 @@ public class MainActivity extends Activity {
 	}
 
 	private void openConfiguredWebPage(String key, String missingMessage) {
-		String url = getPrivateConfigValue(key);
+		String url = getSharedPreferences("config", MODE_PRIVATE)
+				.getString(key, "").trim();
 		if (url.isEmpty()) {
 			Toast.makeText(this, missingMessage, Toast.LENGTH_SHORT).show();
 			return;

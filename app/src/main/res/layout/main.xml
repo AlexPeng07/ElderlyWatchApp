@@ -123,6 +123,10 @@
                         android:text="打开守护管理端" android:textColor="@color/white" />
                     <Button style="@style/ActionButton" android:layout_marginTop="10dp" android:background="@drawable/button_soft"
                         android:onClick="onSmsNumberButtonClicked" android:text="设置短信通知号码" android:textColor="@color/navy_800" />
+                    <Button style="@style/ActionButton" android:layout_marginTop="10dp" android:background="@drawable/button_soft"
+                        android:onClick="onPortalUrlButtonClicked" android:text="设置家属守护中心地址" android:textColor="@color/navy_800" />
+                    <Button style="@style/ActionButton" android:layout_marginTop="10dp" android:background="@drawable/button_soft"
+                        android:onClick="onAdminUrlButtonClicked" android:text="设置守护管理端地址" android:textColor="@color/navy_800" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
